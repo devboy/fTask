@@ -6,9 +6,9 @@ package
 
     import org.devboy.ftask.task;
 
-    public class Test extends Sprite
+    public class Example extends Sprite
     {
-        public function Test()
+        public function Example()
         {
             var shape:Shape = new Shape();
 
