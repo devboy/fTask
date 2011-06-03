@@ -6,14 +6,16 @@ body {
     overflow: auto;
     color: #444;
     font-size: 16px;
-    text-shadow: white 0px 1px 0;
+
+}
+
+container h1 {
+    /*text-shadow: white 0px 1px 0;*/
 }
 
 h1, h2 {
     font-family: Cabin, 'Myriad Pro', 'Lucida Grande', sans-serif;
 }
-
-
 
 h1 {
     font-family: Cabin, 'Myriad Pro', 'Lucida Grande', sans-serif;
@@ -89,6 +91,13 @@ ul {
 
 a {
     text-decoration: none;
+    color: #999;
+    font-weight: bold;
+}
+
+a:hover {
+    color: #444;
+}
 
 img#forkme {
     position: absolute;
@@ -106,13 +115,6 @@ ul#projects {
     list-style: none;
     color: #333;
     margin: 0px 0px 25px 0px;
-    color: #999;
-    font-weight: bold;
-}
-
-a:hover {
-    color: #444;
-}
 }
 
 ul#projects > li {
@@ -166,3 +168,4 @@ pre code {
     /*font-family: "Droid sans";*/
     font-weight: lighter;
 }
+
