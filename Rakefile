@@ -7,11 +7,11 @@ SRC = "src/main/as3"
 FTASKINTERNAL="#{SRC}/org/devboy/ftask/fTaskInternal"
 FTASK="#{SRC}/org/devboy/ftask/ftask"
 TASK="#{SRC}/org/devboy/ftask/task"
-
+GLUE="lib/main/as3/avmglue_0.1.0.2305/avmglue"
 
 desc "Build ftask.abc"
 task :ftask do
-  imports = [TOPLEVEL_ABC, BUILTIN_ABC]
+  imports = [TOPLEVEL_ABC, BUILTIN_ABC,"#{GLUE}.abc"]
   asc("#{FTASK}.as", imports)
 end
 
