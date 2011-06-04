@@ -1,6 +1,5 @@
 package org.devboy.ftask
 {
-
     import flash.utils.getQualifiedClassName;
 
     public class FTask
@@ -40,7 +39,7 @@ package org.devboy.ftask
                 switch (getQualifiedClassName(arg))
                 {
                     case "Array":
-                        var tasks:Vector.<FTask> = new <FTask>[];
+                        var tasks:Array = [];
                         var taskName:String;
                         for each(taskName in arg)
                             tasks.push(fTaskInternal::getTask(taskName));
@@ -94,7 +93,7 @@ package org.devboy.ftask
             _dependencies.push(task);
         }
 
-        fTaskInternal function addDependencies(tasks:Vector.<FTask>):void
+        fTaskInternal function addDependencies(tasks:Array):void
         {
             var task:FTask;
             for each(task in tasks)

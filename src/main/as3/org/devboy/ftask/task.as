@@ -1,6 +1,5 @@
 package org.devboy.ftask
 {
-
     use namespace fTaskInternal;
 
     public function task(name:String, ...args):FTask
