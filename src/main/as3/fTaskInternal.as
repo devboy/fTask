@@ -1,4 +1,3 @@
-package org.devboy.ftask
-{
+package {
     public namespace fTaskInternal;
 }

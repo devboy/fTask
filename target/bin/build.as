@@ -1,5 +1,3 @@
-//import org.devboy.ftask.task;
-
 task("a", function(t)
 {
     trace(t.task.name);
