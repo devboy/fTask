@@ -4,25 +4,35 @@ BUILTIN_ABC = ENV["REDTAMARIN_HOME"] + "/builtin.abc"
 TOPLEVEL_ABC = ENV["REDTAMARIN_HOME"] + "/toplevel.abc"
 SRC = "src/main/as3"
 
-FTASKINTERNAL="#{SRC}/org/devboy/ftask/fTaskInternal"
-FTASK="#{SRC}/org/devboy/ftask/ftask"
-TASK="#{SRC}/org/devboy/ftask/task"
+FTASK="#{SRC}/ftask"
 GLUE="lib/main/as3/avmglue_0.1.0.2305/avmglue"
+TARGET="target/bin"
 
 desc "Build ftask.abc"
-task :ftask do
+task :make_abc do
   imports = [TOPLEVEL_ABC, BUILTIN_ABC,"#{GLUE}.abc"]
-  asc("#{FTASK}.as", imports)
+  asc(["#{FTASK}.as"], imports)
+end
+
+desc "Build ftask.swf"
+task :make_swf => :make_abc do
+  system( "#{ENV["REDTAMARIN_HOME"]}/swfmake -o #{TARGET}/ftask.swf -c #{GLUE}.abc #{FTASK}.abc" )
+end
+
+desc "Build exe"
+task :make_exe => :make_swf do
+  system( "#{ENV["REDTAMARIN_HOME"]}/createprojector -exe #{ENV["REDTAMARIN_HOME"]}/redshell -o #{TARGET}/ftask #{TARGET}/ftask.swf" )
 end
 
 desc "build abc files"
-task :build_abc => [:ftask] do
+task :build => [:make_exe] do
 end
 
-def asc(target, imports=[])
+def asc(asfiles, imports=[])
   cmd_args = ["java", "-jar"]
   cmd_args << ASC_JAR
+  cmd_args << "-AS3" << "-strict"
   imports.each { |import| cmd_args << "-import #{import}" }
-  cmd_args << target
+  asfiles.each { |asfile| cmd_args << "#{asfile}" }
   system cmd_args.join(" ")
 end
