@@ -27,15 +27,18 @@
         <h2>Quick example:</h2>
         <pre><code>var shape:Shape = new Shape();
 
+
 task("paintShape", function(t){
   shape.graphics.beginFill(t.color);
   shape.graphics.drawRect(0, 0, 100, 100);
   shape.graphics.endFill();
 });
 
+
 task("addShape", function(t){
   addChild(shape);
 });
+
 
 task("rotateShape", ["addShape","paintShape"], function(t){
   shape.rotation = 29
