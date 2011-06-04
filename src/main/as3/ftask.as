@@ -1,11 +1,9 @@
-import avmplus.System;
-import avmplus.FileSystem;
-
-import flash.system.System;
-
 include "org/devboy/ftask/fTaskInternal.as";
 include "org/devboy/ftask/FTask.as";
 include "org/devboy/ftask/task.as";
+
+import avmplus.System;
+import avmplus.FileSystem;
 
 var argc:uint = System.argv.length;
 var argv:Array = System.argv;
