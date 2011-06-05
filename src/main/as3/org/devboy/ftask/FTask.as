@@ -1,4 +1,4 @@
-package {
+package org.devboy.ftask{
 
     import flash.utils.getQualifiedClassName;
 

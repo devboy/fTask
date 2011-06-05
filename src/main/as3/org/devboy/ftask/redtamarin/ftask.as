@@ -1,6 +1,6 @@
-include "fTaskInternal.as";
-include "FTask.as";
-include "task.as";
+include "../fTaskInternal.as";
+include "../FTask.as";
+include "../task.as";
 
 import avmplus.System;
 import avmplus.FileSystem;
