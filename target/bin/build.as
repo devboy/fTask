@@ -13,4 +13,4 @@ task("b", function(t)
 task("c", ["a","b"],function(t)
 {
     trace(t.task.name);
-}).invoke({});
+});

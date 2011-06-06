@@ -11,6 +11,7 @@ package org.devboy.ftask{
         private var _closure:Function;
         private var _taskVars:Object;
         private var _tasks:Array;
+        private var _description:String;
 
         public function FTask(name:String)
         {
@@ -56,6 +57,15 @@ package org.devboy.ftask{
                         break;
                 }
             }
+        }
+
+        fTaskInternal function getAllTasks():Array
+        {
+            var tasks:Array=[];
+            var ftask:FTask;
+            for each( ftask in _tasks )
+               tasks = tasks.concat(ftask.fTaskInternal::getAllTasks());
+            return _tasks;
         }
 
         fTaskInternal function getTask(name:String):FTask
@@ -105,10 +115,17 @@ package org.devboy.ftask{
             _closure = closure;
         }
 
-        public function invoke( runVars:Object ):void
+        public function describe( description:String ) : FTask
+        {
+            _description = description;
+            return this;
+        }
+
+        public function invoke( runVars:Object ):FTask
         {
             invokeDependencies(runVars);
             invokeClosure(runVars);
+            return this;
         }
 
         private function invokeClosure(runVars:Object):void
@@ -150,6 +167,11 @@ package org.devboy.ftask{
             for( param in source)
                 target[param] = source[param];
             return target;
+        }
+
+        public function get description():String
+        {
+            return _description || "No description.";
         }
     }
 }

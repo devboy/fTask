@@ -4,7 +4,7 @@ BUILTIN_ABC = ENV["REDTAMARIN_HOME"] + "/builtin.abc"
 TOPLEVEL_ABC = ENV["REDTAMARIN_HOME"] + "/toplevel.abc"
 SRC = "src/main/as3"
 
-FTASK="#{SRC}/org/devboy/ftask/redtamarin/ftask"
+FTASK="#{SRC}/ftask"
 GLUE="lib/main/as3/avmglue_0.1.0.2305/avmglue"
 TARGET="target/bin"
 
