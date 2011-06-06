@@ -1,4 +1,4 @@
-ENV["REDTAMARIN_HOME"] ||= "~/Development/Libraries/RedTamarin/redtamarin_0.3.1.1049_OSX/"
+ENV["REDTAMARIN_HOME"] ||= "~/Development/Libraries/RedTamarin/redtamarin_0.3.1.1049_OSX"
 ASC_JAR = ENV["REDTAMARIN_HOME"] + "/asc.jar"
 BUILTIN_ABC = ENV["REDTAMARIN_HOME"] + "/builtin.abc"
 TOPLEVEL_ABC = ENV["REDTAMARIN_HOME"] + "/toplevel.abc"
@@ -34,5 +34,6 @@ def asc(asfiles, imports=[])
   cmd_args << "-AS3" << "-strict"
   imports.each { |import| cmd_args << "-import #{import}" }
   asfiles.each { |asfile| cmd_args << "#{asfile}" }
+  p "exec: " + cmd_args.join(" ")
   system cmd_args.join(" ")
 end
