@@ -1,4 +1,5 @@
 require 'buildr/as3'
+require File.dirname(__FILE__) + '/redtamarin-tools'
 
 FLEX_SDK = FlexSDK.new("4.5.0.20967")
 FLEX_SDK.default_options << "-compiler.incremental=true" << "-static-link-runtime-shared-libraries=true"
@@ -13,8 +14,7 @@ define "fTask" do
   end
 
   define "CLI" do
-    #setting javac to prevent compilation
-    compile.using :javac
+    compile.using :rtc
   end
 
   doc.options[:flexsdk] = FLEX_SDK
