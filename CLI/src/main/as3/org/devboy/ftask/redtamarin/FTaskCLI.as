@@ -11,11 +11,13 @@ package org.devboy.ftask.redtamarin
 
     public class FTaskCLI
     {
+        public static const VERSION:String="0.0.1-SNAPSHOT";
         private const DEFAULT_BUILDFILE:String = "build.as";
         private const HELP:String =
                 "Usage: ftask [-f buildfile] tasks...\n" +
                 "Options:\n" +
                 "-help: Prints this screen.\n" +
+                "-v: Prints the version of fTask.\n" +
                 "-T: Prints all available tasks.\n";
 
         public function FTaskCLI(argv:Array)
@@ -37,6 +39,10 @@ package org.devboy.ftask.redtamarin
                 if (arg == "-help")
                 {
                     trace(HELP);
+                }
+                if (arg == "-v")
+                {
+                    trace("fTask version: "+VERSION);
                 }
                 else if (arg == "-T")
                 {
