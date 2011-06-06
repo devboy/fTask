@@ -13,11 +13,10 @@ package org.devboy.ftask.redtamarin
     {
         private const DEFAULT_BUILDFILE:String = "build.as";
         private const HELP:String =
-                "fTask\n" +
-                "Usage: ftask [-f buildfile] [task]\n" +
+                "Usage: ftask [-f buildfile] tasks...\n" +
                 "Options:\n" +
-                "-help: Prints this screen." +
-                "-T: Prints all available tasks.";
+                "-help: Prints this screen.\n" +
+                "-T: Prints all available tasks.\n";
 
         public function FTaskCLI(argv:Array)
         {
@@ -26,8 +25,9 @@ package org.devboy.ftask.redtamarin
 
         private function parseArgs(argv:Array):void
         {
+            var printTasks:Boolean=false;
             var buildfile:String = "";
-            var taskName:String = "";
+            var taskNames:Array = [];
             var arg:String = "";
             var i:int = 0;
             const l:int = argv.length;
@@ -40,7 +40,7 @@ package org.devboy.ftask.redtamarin
                 }
                 else if (arg == "-T")
                 {
-                    printAllTasks();
+                    printTasks = true;
                 }
                 else if (arg == "-f")
                 {
@@ -49,30 +49,36 @@ package org.devboy.ftask.redtamarin
                 }
                 else
                 {
-                    taskName = arg;
+                    taskNames.push(arg);
                 }
             }
 
-            buildfile = buildfile == "" ? DEFAULT_BUILDFILE : buildfile;
+            if(l<1)
+                trace(HELP);
 
+            buildfile = buildfile == "" ? DEFAULT_BUILDFILE : buildfile;
             var absBuildfile:String = FileSystem.absolutePath(buildfile);
             if (!FileSystem.exists(absBuildfile))
             {
-                trace( "Could not find buildfile: " + absBuildfile );
+                trace( "Could not find buildfile: " + buildfile );
                 System.exit(1);
             }
 
             System.eval(FileSystem.read(absBuildfile));
 
-            if( taskName != "" )
-                task(taskName);
+            if(printTasks)
+                printAllTasks();
+
+            var taskName:String;
+            for each( taskName in taskNames )
+                task(taskName).invoke({});
         }
 
         private function printAllTasks():void
         {
             var ftask:FTask;
             for each( ftask in FTask.fTaskInternal::ROOT.fTaskInternal::getAllTasks() )
-                trace( ftask.name + ":\t" + ftask.description );
+                trace( ftask.name + "\t#" + ftask.description );
         }
     }
 }

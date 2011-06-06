@@ -1,16 +1,27 @@
+import avmplus.*;
 import org.devboy.ftask.*;
 
-task("a", function(t)
+task("compile", function(t)
 {
-    trace(t.task.name);
-});
+    FileSystem.write("compile.txt","Created by the compile task.")
+}).
+describe("Compile task example.");
 
-task("b", function(t)
+task("clean", function(t)
 {
-    trace(t.task.name);
-});
+    if(FileSystem.exists("compile.txt"))
+        FileSystem.remove("compile.txt");
+}).
+describe("Clean task example.");
 
-task("c", ["a","b"],function(t)
+task("test",["compile"], function(t)
 {
-    trace(t.task.name);
-});
+    if(FileSystem.exists("compile.txt"))
+        if( FileSystem.read("compile.txt") == "Created by the compile task." )
+            trace("Test passed!");
+        else
+            trace("Test failed!");
+}).
+describe("Test task example.");
+
+task("build", ["test"]).describe("Build task example.");
