@@ -13,8 +13,25 @@ container h1 {
     /*text-shadow: white 0px 1px 0;*/
 }
 
+.left-column {
+    width: 50%;
+    float: left;
+    display: block;
+}
+
+.right-column {
+    width: 50%;
+    float: right;
+}
+
 h1, h2 {
     font-family: Cabin, 'Myriad Pro', 'Lucida Grande', sans-serif;
+}
+
+p {
+    padding-bottom: 10px;
+    padding-top: 10px;
+    line-height: 18px;
 }
 
 h1 {
@@ -109,45 +126,6 @@ img#forkme {
 #container {
     width: 800px;
     margin: 100px auto;
-}
-
-ul#projects {
-    list-style: none;
-    color: #333;
-    margin: 0px 0px 25px 0px;
-}
-
-ul#projects > li {
-    margin-bottom: 20px;
-}
-
-ul#projects > li:last-child {
-    margin-bottom: 0px;
-}
-
-ul#projects hgroup {
-    position: relative;
-    height: 37px;
-}
-
-ul#projects hgroup h3 {
-    position: absolute;
-    bottom: 0px;
-    left: 0px;
-    font-size: 30px;
-    color: #555;
-}
-
-ul#projects hgroup h4 {
-    margin: 0px;
-    position: absolute;
-    bottom: 0px;
-    right: 0px;
-    color: #aaa;
-}
-
-ul#projects h4 {
-    margin-top: 15px;
 }
 
 pre {
