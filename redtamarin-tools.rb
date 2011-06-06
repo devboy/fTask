@@ -4,30 +4,6 @@ BUILTIN_ABC = ENV["REDTAMARIN_HOME"] + "/builtin.abc"
 TOPLEVEL_ABC = ENV["REDTAMARIN_HOME"] + "/toplevel.abc"
 GLUE_ABC = ENV["REDTAMARIN_HOME"] + "/avmglue.abc"
 
-#FTASK="#{SRC}/ftask"
-#TARGET="target/bin"
-#
-#desc "Build ftask.abc"
-#task :make_abc do
-#  imports = [TOPLEVEL_ABC, BUILTIN_ABC, GLUE_ABC]
-#  asc(["#{FTASK}.as"], imports)
-#end
-#
-#desc "Build ftask.swf"
-#task :make_swf => :make_abc do
-#  File.delete "#{TARGET}/ftask.swf" if File.exists? "#{TARGET}/ftask.swf"
-#  system("#{ENV["REDTAMARIN_HOME"]}/swfmake -o #{TARGET}/ftask.swf -c #{GLUE_ABC} #{FTASK}.abc")
-#end
-#
-#desc "Build exe"
-#task :make_exe => :make_swf do
-#  File.delete "#{TARGET}/ftask" if File.exists? "#{TARGET}/ftask"
-#  File.delete "#{TARGET}/ftask.exe" if File.exists? "#{TARGET}/ftask.exe"
-#
-#  system("#{ENV["REDTAMARIN_HOME"]}/createprojector -exe #{ENV["REDTAMARIN_HOME"]}/redshell -o #{TARGET}/ftask #{TARGET}/ftask.swf")
-#  system("#{ENV["REDTAMARIN_HOME"]}/createprojector -exe #{ENV["REDTAMARIN_HOME"]}/redshell.exe -o #{TARGET}/ftask.exe #{TARGET}/ftask.swf")
-#end
-
 def asc(asfiles, imports=[])
   cmd_args = ["java", "-jar"]
   cmd_args << ASC_JAR
