@@ -26,47 +26,86 @@
     </section>
     <section id="library-usage">
         <h2>Use the <strong>fTask</strong> library</h2>
+        <p>Start by downloading the <a href="https://github.com/devboy/fTask">source</a> or the <a href="https://github.com/devboy/fTask/archives/master">swc-file</a> and inlcude it in your project.<br>
+Now you can start defining tasks, and execute them in your ActionScript projects.</p>
         <pre><code>import org.devboy.ftask.*;
 
 var shape:Shape = new Shape();
 
-
+// Define a task named "paintShape"
 task("paintShape", function(t){
     shape.graphics.beginFill(t.color);
     shape.graphics.drawRect(0, 0, 100, 100);
     shape.graphics.endFill();
 });
 
-
+// Define a task named "addShape"
 task("addShape", function(t){
     addChild(shape);
 });
 
-
+// Define a task named "rotateShape"
+// Define "addShape" & "paintShape" as its dependencies
 task("rotateShape", ["addShape","paintShape"], function(t){
     shape.rotation = 29
-}).invoke({color:0x0000FF});</code></pre>
+}).invoke({color:0x0000FF});
+//invoke will execute the task and its dependencies</code></pre>
     </section>
     <section id="tool-usage">
         <h2>Use the <strong>fTask</strong> build-tool</h2>
-        <pre><code>var shape:Shape = new Shape();
+        <p>Thanks to the <a href="http://code.google.com/p/redtamarin/">redtamarin-project</a> we are able to run ActionScript3 on the command-line.<br>To start with the fTask build-tool just download an executable for your OS <a href="https://github.com/devboy/fTask/archives/master">here</a>.</p>
+        <p>Put the executable on your path and verify it by checking fTask's version:</p>
+        <pre><code>$ ftask -v
+fTask version: 0.0.1-SNAPSHOT</code></pre>
+        <p>Now you can write buildfiles in ActionScript3 and run them with fTask.<br>Let's work with this example buildfile:</p>
+        <pre><code>import avmplus.*;
+import org.devboy.ftask.*;
 
+var content:String = "Created by the compile task.";
 
-task("paintShape", function(t){
-shape.graphics.beginFill(t.color);
-shape.graphics.drawRect(0, 0, 100, 100);
-shape.graphics.endFill();
-});
+task("compile", function(t)
+{
+    FileSystem.write("compile.txt",content)
+}).
+describe("Compile task example.");
 
+task("clean", function(t)
+{
+    if(FileSystem.exists("compile.txt"))
+        FileSystem.remove("compile.txt");
+}).
+describe("Clean task example.");
 
-task("addShape", function(t){
-addChild(shape);
-});
+task("test",["compile"], function(t)
+{
+    if(FileSystem.exists("compile.txt"))
+        if( FileSystem.read("compile.txt") == content )
+            trace("Test passed!");
+        else
+            trace("Test failed!");
+}).
+describe("Test task example.");
 
-
-task("rotateShape", ["addShape","paintShape"], function(t){
-shape.rotation = 29
-}).invoke({color:0x0000FF});</code></pre>
+task("build", ["test"]).describe("Build task example.");</code></pre>
+        <p>Save the script above as "build.as". Then cd into the directory containing "build.as".</p>
+        <pre><code>$ cd path/to/directory</code></pre>
+        <p>Let's run fTask to see what tasks are available in our buildfile:</p>
+        <pre><code>$ ftask -T
+compile	#Compile task example.
+clean	#Clean task example.
+test	#Test task example.
+build	#Build task example.</code></pre>
+        <p>Now we can run each task by just "calling" its name:</p>
+        <pre><code>$ ftask compile</code></pre>
+        <p>We could also run multiple tasks at once:</p>
+        <pre><code>$ ftask clean compile</code></pre>
+        <p>We can open the help message by typing:</p>
+        <pre><code>$ ftask -help
+Usage: ftask [-f buildfile] tasks...
+Options:
+-help: Prints this screen.
+-v: Prints the version of fTask.
+-T: Prints all available tasks.</code></pre>
     </section>
 </div>
 </body>
