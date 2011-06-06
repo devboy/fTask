@@ -21,27 +21,51 @@
     <h1>fTask</h1>
     <section>
         <h2>fTask is a task-system written in <strong>ActionScript</strong>.<br>It is heavily inspired by <a
-                href="http://rake.rubyforge.org/">Rake for Ruby</a>.</h2>
+                href="http://rake.rubyforge.org/">Rake for Ruby</a>.<br><br><strong>fTask</strong> is available in two
+            flavors:<br><a href="#library-usage">as a library</a><br>and<br><a href="#tool-usage">as a build-tool</a></h2>
     </section>
-    <section>
-        <h2>Quick example:</h2>
-        <pre><code>var shape:Shape = new Shape();
+    <section id="library-usage">
+        <h2>Use the <strong>fTask</strong> library</h2>
+        <pre><code>import org.devboy.ftask.*;
+
+var shape:Shape = new Shape();
 
 
 task("paintShape", function(t){
-  shape.graphics.beginFill(t.color);
-  shape.graphics.drawRect(0, 0, 100, 100);
-  shape.graphics.endFill();
+    shape.graphics.beginFill(t.color);
+    shape.graphics.drawRect(0, 0, 100, 100);
+    shape.graphics.endFill();
 });
 
 
 task("addShape", function(t){
-  addChild(shape);
+    addChild(shape);
 });
 
 
 task("rotateShape", ["addShape","paintShape"], function(t){
-  shape.rotation = 29
+    shape.rotation = 29
+}).invoke({color:0x0000FF});</code></pre>
+    </section>
+    <section id="tool-usage">
+        <h2>Use the <strong>fTask</strong> build-tool</h2>
+        <pre><code>var shape:Shape = new Shape();
+
+
+task("paintShape", function(t){
+shape.graphics.beginFill(t.color);
+shape.graphics.drawRect(0, 0, 100, 100);
+shape.graphics.endFill();
+});
+
+
+task("addShape", function(t){
+addChild(shape);
+});
+
+
+task("rotateShape", ["addShape","paintShape"], function(t){
+shape.rotation = 29
 }).invoke({color:0x0000FF});</code></pre>
     </section>
 </div>
